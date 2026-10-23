@@ -24,6 +24,8 @@
       crossorigin
     />
     <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/story-motion.css" />
+    <link rel="stylesheet" href="/src/frame-check.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
@@ -76,13 +78,18 @@
         </picture>
       </section>
 
-      <section class="shared" aria-labelledby="shared-title">
+      <section
+        class="shared"
+        id="photo-story"
+        aria-labelledby="shared-title"
+        data-story-motion
+      >
         <div class="shared__message">
           <h2 class="shared__title" id="shared-title">
             Макс отправил<br />
             снимок в чат
           </h2>
-          <div class="speech speech--photo" data-reveal="bubble">
+          <div class="speech speech--photo">
             <picture class="speech__outline" aria-hidden="true">
               <source
                 media="(max-width: 900px)"
@@ -97,16 +104,29 @@
             </picture>
             <p>Смотрите,<br />какие!</p>
           </div>
+          <div class="shared__receipt">
+            <span class="shared__sent" aria-hidden="true">✓✓</span>
+            <span>Фото в чате</span>
+            <button type="button" data-story-replay>Ещё раз</button>
+          </div>
         </div>
         <figure class="shared__photo">
-          <img
-            src="/images/headphones-photo.png"
-            width="1536"
-            height="1024"
-            alt="Наушники в коробке. Под ней — банковская карта."
-            decoding="async"
-            loading="lazy"
-          />
+          <div class="shared__image-window">
+            <img
+              src="/images/headphones-photo.png"
+              width="1536"
+              height="1024"
+              alt="Наушники в коробке. Под ней — банковская карта."
+              decoding="async"
+              loading="lazy"
+            />
+          </div>
+          <div class="shared__viewfinder" aria-hidden="true">
+            <span class="shared__corner shared__corner--top-left"></span>
+            <span class="shared__corner shared__corner--top-right"></span>
+            <span class="shared__corner shared__corner--bottom-left"></span>
+            <span class="shared__corner shared__corner--bottom-right"></span>
+          </div>
         </figure>
       </section>
 
@@ -323,6 +343,58 @@
               height="20.5"
               alt=""
             />
+          </div>
+        </div>
+        <div
+          class="frame-check"
+          id="frame-check"
+          data-frame-check
+          role="group"
+          aria-labelledby="frame-check-title"
+        >
+          <div class="frame-check__intro">
+            <p class="frame-check__eyebrow">Твоя очередь</p>
+            <h3 id="frame-check-title">Что здесь стоит оставить за кадром?</h3>
+            <p id="frame-check-instruction">
+              Нажми на деталь, которую не стоит отправлять друзьям.
+            </p>
+          </div>
+          <div class="frame-check__stage">
+            <div class="frame-check__photo">
+              <img
+                src="/images/headphones-photo.png"
+                width="1536"
+                height="1024"
+                alt="Наушники в коробке. Справа из-под неё видна карта."
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <button
+              class="frame-check__target"
+              type="button"
+              aria-label="Банковская карта справа от коробки"
+              aria-describedby="frame-check-instruction"
+              data-card-target
+            ></button>
+            <span class="frame-check__outline" aria-hidden="true"></span>
+            <span class="frame-check__crop" aria-hidden="true"></span>
+          </div>
+          <p class="frame-check__fallback">
+            Карта справа от коробки должна остаться за кадром.
+          </p>
+          <div class="frame-check__response">
+            <p
+              class="frame-check__status"
+              role="status"
+              aria-live="polite"
+              data-check-status
+            >
+              Перед отправкой проверь весь снимок.
+            </p>
+            <button class="frame-check__reset" type="button" data-check-reset>
+              Попробовать ещё раз
+            </button>
           </div>
         </div>
         <aside class="parent-note" aria-labelledby="parent-title">
