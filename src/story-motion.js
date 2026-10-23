@@ -54,13 +54,22 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
 
     frame = requestAnimationFrame(() => {
       if (disposed || current !== generation) return
-      setTitle(true)
       root.classList.add('is-story-playing')
     })
   }
 
   function onAnimationEnd(event) {
-    if (event.target === receipt && playing) finish()
+    if (disposed || !playing || !root.classList.contains('is-story-playing')) {
+      return
+    }
+
+    if (event.target === photo && event.animationName === 'photo-sends') {
+      setTitle(true)
+    }
+
+    if (event.target === receipt && event.animationName === 'receipt-arrives') {
+      finish()
+    }
   }
 
   function configure() {

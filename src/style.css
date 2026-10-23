@@ -157,7 +157,7 @@ h1 span {
 }
 
 .hero__indicator {
-  --led-size: clamp(3px, 0.45cqw, 6.5px);
+  --led-size: clamp(2.25px, 0.3375cqw, 4.875px);
   position: absolute;
   top: 69.2%;
   left: 27.6%;
