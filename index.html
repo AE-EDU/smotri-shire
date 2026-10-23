@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff9f2" />
+    <meta
+      name="description"
+      content="История одного снимка: посмотри на весь кадр перед отправкой."
+    />
+    <title>Смотри шире — история одного снимка</title>
+    <link
+      rel="preload"
+      href="/fonts/unbounded-cyrillic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/golos-text-cyrillic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#story">Перейти к истории</a>
+    <main class="longread" id="story">
+      <section class="hero" aria-labelledby="story-title">
+        <header class="page-header container">
+          <p>Смотри шире</p>
+          <p class="page-header__genre">
+            <span>История</span> <span>одного снимка</span>
+          </p>
+        </header>
+        <div class="hero__copy container">
+          <h1 id="story-title">
+            <span>Перед</span>
+            <span>отправкой</span>
+            <span>посмотри</span>
+            <span>на весь кадр</span>
+          </h1>
+          <p class="hero__intro">
+            Макс накопил на наушники.<br />
+            И хочет показать их друзьям.
+          </p>
+        </div>
+        <div class="hero__art" data-reveal="character">
+          <img
+            class="hero__character"
+            src="/images/max-headphones.png"
+            width="1383"
+            height="1137"
+            alt="Макс рассматривает новые оранжевые наушники."
+            fetchpriority="high"
+          />
+          <img
+            class="hero__music"
+            src="/images/music-marks.svg"
+            width="51"
+            height="34"
+            alt=""
+          />
+        </div>
+        <picture class="hero__wave" aria-hidden="true">
+          <source media="(max-width: 900px)" srcset="/images/wave-mobile.svg" />
+          <img
+            src="/images/wave-desktop.svg"
+            width="1440"
+            height="112.721"
+            alt=""
+          />
+        </picture>
+      </section>
+
+      <section class="shared" aria-labelledby="shared-title">
+        <div class="shared__message">
+          <h2 class="shared__title" id="shared-title">
+            Макс отправил<br />
+            снимок в чат
+          </h2>
+          <div class="speech speech--photo" data-reveal="bubble">
+            <picture class="speech__outline" aria-hidden="true">
+              <source
+                media="(max-width: 900px)"
+                srcset="/images/bubble-photo-mobile.svg"
+              />
+              <img
+                src="/images/bubble-photo-desktop.svg"
+                width="464"
+                height="328"
+                alt=""
+              />
+            </picture>
+            <p>Смотрите,<br />какие!</p>
+          </div>
+        </div>
+        <figure class="shared__photo">
+          <img
+            src="/images/headphones-photo.png"
+            width="1536"
+            height="1024"
+            alt="Наушники в коробке. Под ней — банковская карта."
+            decoding="async"
+            loading="lazy"
+          />
+        </figure>
+      </section>
+
+      <section class="detail" aria-labelledby="detail-title">
+        <h2 class="detail__heading" id="detail-title">
+          <span>В кадр</span> <span>попала карта</span>
+        </h2>
+        <div class="detail__viewport" data-zoom>
+          <img
+            class="detail__photo"
+            src="/images/headphones-photo.png"
+            width="1536"
+            height="1024"
+            alt="Карта под коробкой. Код безопасности виден на снимке."
+            decoding="async"
+            loading="lazy"
+          />
+          <picture class="detail__pointer" aria-hidden="true">
+            <source
+              media="(max-width: 900px)"
+              srcset="/images/pointer-mobile.svg"
+            />
+            <img
+              src="/images/pointer-desktop.svg"
+              width="82"
+              height="8"
+              alt=""
+            />
+          </picture>
+          <picture class="detail__dot" aria-hidden="true">
+            <source
+              media="(max-width: 900px)"
+              srcset="/images/pointer-dot-mobile.svg"
+            />
+            <img
+              src="/images/pointer-dot-desktop.svg"
+              width="6"
+              height="6"
+              alt=""
+            />
+          </picture>
+          <p class="detail__label">Код<br />безопасности</p>
+        </div>
+      </section>
+
+      <section class="rule container" aria-labelledby="rule-title">
+        <h2 id="rule-title"><span>Это код</span> <span>для оплаты</span></h2>
+        <div class="rule__body">
+          <picture class="rule__lock" data-reveal="lock" aria-hidden="true">
+            <source
+              media="(max-width: 900px)"
+              srcset="/images/lock-mobile.svg"
+            />
+            <img src="/images/lock-desktop.svg" width="44" height="44" alt="" />
+          </picture>
+          <p>Не показывай его <span>даже друзьям.</span></p>
+        </div>
+      </section>
+
+      <section class="help container" aria-labelledby="help-title">
+        <div class="help__intro">
+          <h2 id="help-title">А если уже<br />отправил?</h2>
+          <div class="help__question">
+            <img
+              class="help__character"
+              src="/images/max-thinking.png"
+              width="1024"
+              height="1536"
+              alt="Макс задумался и спрашивает, что теперь делать."
+              decoding="async"
+              loading="lazy"
+            />
+            <div class="speech speech--question" data-reveal="bubble">
+              <picture class="speech__outline" aria-hidden="true">
+                <source
+                  media="(max-width: 900px)"
+                  srcset="/images/bubble-question-mobile.svg"
+                />
+                <img
+                  src="/images/bubble-question-desktop.svg"
+                  width="280"
+                  height="160"
+                  alt=""
+                />
+              </picture>
+              <p>И что теперь<br />делать?</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide" data-guide>
+          <h3 class="guide__label" id="guide-title">Гайд</h3>
+          <div class="guide__card">
+            <div
+              class="guide__tabs"
+              role="tablist"
+              aria-label="Для кого советы"
+            >
+              <button
+                type="button"
+                role="tab"
+                id="tab-you"
+                aria-controls="guide-you"
+                aria-selected="true"
+                tabindex="0"
+              >
+                для тебя
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="tab-parents"
+                aria-controls="guide-parents"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                для родителей
+              </button>
+            </div>
+            <div class="guide__panels">
+              <div
+                class="guide__panel"
+                id="guide-you"
+                role="tabpanel"
+                aria-labelledby="tab-you"
+                tabindex="0"
+              >
+                <p class="guide__audience">Для тебя</p>
+                <section class="guide__advice">
+                  <h4>Виден код карты?</h4>
+                  <p>
+                    Сразу позови взрослого, которому доверяешь.<br />
+                    Вместе заблокируйте карту и&nbsp;обратитесь в&nbsp;банк
+                    за&nbsp;перевыпуском.
+                  </p>
+                </section>
+                <section class="guide__advice">
+                  <h4>Можно просто удалить?</h4>
+                  <p>Удали фото из чата. Но у других могла остаться копия.</p>
+                </section>
+                <section class="guide__advice">
+                  <h4>Как рассказать взрослому?</h4>
+                  <p>
+                    «Я отправил фото с картой.<br />
+                    Помоги мне разобраться».
+                  </p>
+                </section>
+              </div>
+              <div
+                class="guide__panel"
+                id="guide-parents"
+                role="tabpanel"
+                aria-labelledby="tab-parents"
+                tabindex="0"
+              >
+                <p class="guide__audience">Для родителей</p>
+                <section class="guide__advice">
+                  <h4>Выслушайте</h4>
+                  <p>
+                    «Спасибо, что рассказал.<br />
+                    Давай разберёмся вместе».
+                  </p>
+                </section>
+                <section class="guide__advice">
+                  <h4>Защитите карту</h4>
+                  <p>
+                    Заблокируйте карту и свяжитесь с банком для перевыпуска.
+                    Проверьте последние списания.
+                  </p>
+                </section>
+                <section class="guide__advice">
+                  <h4>Обсудите позже</h4>
+                  <p>
+                    Посмотрите фото вместе. Спросите, что ещё попало в кадр и
+                    что стоит убрать перед отправкой.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <div class="closing__frame">
+          <h2 id="closing-title">Что оставишь<br />за кадром?</h2>
+          <p class="closing__check">
+            Проверь, не попали ли на фото данные карты,<br class="desktop" />
+            адрес или личная переписка.
+          </p>
+          <div
+            class="closing__corners"
+            data-reveal="corners"
+            aria-hidden="true"
+          >
+            <img
+              class="closing__corners-desktop"
+              src="/images/frame-desktop.svg"
+              width="1248.14"
+              height="392"
+              alt=""
+            />
+            <img
+              class="closing__corner-top"
+              src="/images/frame-top-mobile.svg"
+              width="20.5"
+              height="20.5"
+              alt=""
+            />
+            <img
+              class="closing__corner-bottom"
+              src="/images/frame-bottom-mobile.svg"
+              width="20.5"
+              height="20.5"
+              alt=""
+            />
+          </div>
+        </div>
+        <aside class="parent-note" aria-labelledby="parent-title">
+          <h3 id="parent-title">Родителям</h3>
+          <div class="parent-note__body">
+            <p class="parent-note__question">«Что ещё видно на фото?»</p>
+            <p>
+              Посмотрите снимок вместе.<br />
+              Пусть ребёнок первым заметит детали.
+            </p>
+          </div>
+        </aside>
+        <footer class="page-footer">
+          <p>Смотри шире</p>
+          <a
+            href="https://www.cbr.ru/Reception/TopicalMessage/Page/3401"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            О данных карты — Банк России
+          </a>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

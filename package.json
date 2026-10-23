@@ -1,0 +1,21 @@
+{
+  "name": "smotri-shire",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build --base=./",
+    "preview": "vite preview --host 127.0.0.1",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "node --check src/main.js && npm run format:check"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2",
+    "vite": "8.3.5"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}
