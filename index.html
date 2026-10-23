@@ -31,7 +31,7 @@
   <body>
     <a class="skip-link" href="#story">Перейти к истории</a>
     <main class="longread" id="story">
-      <section class="hero" aria-labelledby="story-title">
+      <section class="hero" aria-labelledby="story-title" data-motion-block>
         <header class="page-header container">
           <p>Смотри шире</p>
           <p class="page-header__genre">
@@ -107,7 +107,6 @@
           <div class="shared__receipt">
             <span class="shared__sent" aria-hidden="true">✓✓</span>
             <span>Фото в чате</span>
-            <button type="button" data-story-replay>Ещё раз</button>
           </div>
         </div>
         <figure class="shared__photo">
@@ -130,7 +129,7 @@
         </figure>
       </section>
 
-      <section class="detail" aria-labelledby="detail-title">
+      <section class="detail" aria-labelledby="detail-title" data-motion-block>
         <h2 class="detail__heading" id="detail-title">
           <span>В кадр</span> <span>попала карта</span>
         </h2>
@@ -172,7 +171,11 @@
         </div>
       </section>
 
-      <section class="rule container" aria-labelledby="rule-title">
+      <section
+        class="rule container"
+        aria-labelledby="rule-title"
+        data-motion-block
+      >
         <h2 id="rule-title"><span>Это код</span> <span>для оплаты</span></h2>
         <div class="rule__body">
           <picture class="rule__lock" data-reveal="lock" aria-hidden="true">
@@ -189,7 +192,7 @@
       <section class="help container" aria-labelledby="help-title">
         <div class="help__intro">
           <h2 id="help-title">А если уже<br />отправил?</h2>
-          <div class="help__question">
+          <div class="help__question" data-motion-block>
             <img
               class="help__character"
               src="/images/max-thinking.png"
@@ -311,7 +314,7 @@
       </section>
 
       <section class="closing" aria-labelledby="closing-title">
-        <div class="closing__frame">
+        <div class="closing__frame" data-motion-block>
           <h2 id="closing-title">Что оставишь<br />за кадром?</h2>
           <p class="closing__check">
             Проверь, не попали ли на фото данные карты,<br class="desktop" />

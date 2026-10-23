@@ -96,23 +96,6 @@
   margin-right: 6px;
 }
 
-.shared__receipt button {
-  min-height: 44px;
-  padding: 0 8px;
-  border: 0;
-  border-radius: 6px;
-  background: transparent;
-  color: inherit;
-  font-size: inherit;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  cursor: pointer;
-}
-
-.shared__receipt button:hover {
-  background: rgb(255 249 242 / 55%);
-}
-
 .is-story-ready .shared__image-window {
   clip-path: inset(22% 40% 18% 18%);
 }
@@ -120,10 +103,6 @@
 .is-story-ready .speech--photo,
 .is-story-ready .shared__receipt {
   opacity: 0;
-}
-
-.is-story-ready .shared__receipt button {
-  pointer-events: none;
 }
 
 .is-story-playing .shared__image-window {
