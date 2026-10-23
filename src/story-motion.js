@@ -3,6 +3,7 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
 
   const photo = root.querySelector('.shared__photo')
   const receipt = root.querySelector('.shared__receipt')
+  const title = root.querySelector('[data-story-title]')
   const image = photo.querySelector('img')
   let unsubscribe = () => {}
   let frame = null
@@ -10,10 +11,15 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
   let disposed = false
   let generation = 0
 
+  function setTitle(sent) {
+    title.textContent = sent ? 'Макс отправил' : 'Макс хочет отправить'
+  }
+
   function reset() {
     generation += 1
     playing = false
     cancelAnimationFrame(frame)
+    setTitle(false)
     root.classList.remove('is-frame-open', 'is-photo-sent', 'is-story-playing')
     root.classList.add('is-story-ready')
   }
@@ -22,6 +28,7 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
     generation += 1
     playing = false
     cancelAnimationFrame(frame)
+    setTitle(true)
     root.classList.add('is-frame-open', 'is-photo-sent')
     root.classList.remove('is-story-ready', 'is-story-playing')
   }
@@ -30,6 +37,7 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
     const current = ++generation
     playing = true
     cancelAnimationFrame(frame)
+    setTitle(false)
     root.classList.remove('is-frame-open', 'is-photo-sent', 'is-story-playing')
     root.classList.add('is-story-ready')
 
@@ -46,6 +54,7 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
 
     frame = requestAnimationFrame(() => {
       if (disposed || current !== generation) return
+      setTitle(true)
       root.classList.add('is-story-playing')
     })
   }
@@ -88,6 +97,7 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
     root.removeEventListener('animationend', onAnimationEnd)
     reducedMotion?.removeEventListener('change', configure)
     document.removeEventListener('visibilitychange', onVisibilityChange)
+    setTitle(true)
     root.classList.remove(
       'is-story-enhanced',
       'is-story-ready',

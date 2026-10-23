@@ -157,13 +157,13 @@ h1 span {
 }
 
 .hero__indicator {
-  --led-size: clamp(2px, 0.35cqw, 5px);
+  --led-size: clamp(3px, 0.45cqw, 6.5px);
   position: absolute;
-  top: 66.8%;
-  left: 27.4%;
+  top: 69.2%;
+  left: 27.6%;
   display: flex;
   gap: calc(var(--led-size) * 0.85);
-  transform: translate(-50%, -50%) rotate(66deg);
+  transform: translate(-50%, -50%) rotate(-24deg) scaleX(0.8);
   pointer-events: none;
 }
 
@@ -171,11 +171,12 @@ h1 span {
   width: var(--led-size);
   height: var(--led-size);
   border-radius: 50%;
-  background: #d5ffff;
+  background: #e6ffff;
   box-shadow:
-    0 0 2px #fff,
-    0 0 calc(var(--led-size) * 1.5) #00f5f0,
-    0 0 calc(var(--led-size) * 3) #00dcd8;
+    0 0 calc(var(--led-size) * 0.5) #fff,
+    0 0 calc(var(--led-size) * 1.5) calc(var(--led-size) * 0.25) #00fff0,
+    0 0 calc(var(--led-size) * 3) calc(var(--led-size) * 0.5)
+      rgb(0 235 230 / 85%);
 }
 
 .hero__music {
