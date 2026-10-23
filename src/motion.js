@@ -21,6 +21,14 @@ export function initMotion(root, { reducedMotion, visibility } = {}) {
   function reset(scene) {
     scene.generation += 1
     scene.elements.forEach((element) => {
+      if (
+        element.hasAttribute('data-motion-once') &&
+        element.classList.contains('is-revealed')
+      ) {
+        element.classList.add('is-finished')
+        return
+      }
+
       element.classList.remove('is-revealed', 'is-finished')
     })
   }

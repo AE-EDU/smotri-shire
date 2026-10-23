@@ -1,4 +1,7 @@
 .shared {
+  --frame-open-time: 850ms;
+  --card-pause: 1000ms;
+  --photo-send-delay: calc(var(--frame-open-time) + var(--card-pause));
   --photo-sent: translate(2.5%, 0) rotate(-2deg) scale(0.86);
   --photo-shadow:
     0 0 0 calc(12 * var(--u)) var(--paper),
@@ -106,7 +109,7 @@
 }
 
 .is-story-playing .shared__image-window {
-  animation: frame-opens 850ms var(--ease-out) both;
+  animation: frame-opens var(--frame-open-time) var(--ease-out) both;
 }
 
 .is-story-playing .shared__viewfinder {
@@ -114,15 +117,17 @@
 }
 
 .is-story-playing .shared__photo {
-  animation: photo-sends 600ms var(--ease-out) 1000ms both;
+  animation: photo-sends 600ms var(--ease-out) var(--photo-send-delay) both;
 }
 
 .is-story-playing .speech--photo {
-  animation: message-arrives 450ms var(--ease-out) 1300ms both;
+  animation: message-arrives 450ms var(--ease-out) both;
+  animation-delay: calc(var(--photo-send-delay) + 300ms);
 }
 
 .is-story-playing .shared__receipt {
-  animation: receipt-arrives 250ms var(--ease-out) 1650ms both;
+  animation: receipt-arrives 250ms var(--ease-out) both;
+  animation-delay: calc(var(--photo-send-delay) + 650ms);
 }
 
 @keyframes frame-opens {

@@ -50,7 +50,7 @@
             И хочет показать их друзьям.
           </p>
         </div>
-        <div class="hero__art" data-reveal="character">
+        <div class="hero__art" data-reveal="character" data-motion-once>
           <img
             class="hero__character"
             src="/images/max-headphones.png"
@@ -59,6 +59,15 @@
             alt="Макс рассматривает новые оранжевые наушники."
             fetchpriority="high"
           />
+          <span
+            class="hero__indicator"
+            data-reveal="indicator"
+            aria-hidden="true"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
           <img
             class="hero__music"
             src="/images/music-marks.svg"

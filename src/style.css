@@ -156,6 +156,28 @@ h1 span {
   height: auto;
 }
 
+.hero__indicator {
+  --led-size: clamp(2px, 0.35cqw, 5px);
+  position: absolute;
+  top: 66.8%;
+  left: 27.4%;
+  display: flex;
+  gap: calc(var(--led-size) * 0.85);
+  transform: translate(-50%, -50%) rotate(66deg);
+  pointer-events: none;
+}
+
+.hero__indicator span {
+  width: var(--led-size);
+  height: var(--led-size);
+  border-radius: 50%;
+  background: #d5ffff;
+  box-shadow:
+    0 0 2px #fff,
+    0 0 calc(var(--led-size) * 1.5) #00f5f0,
+    0 0 calc(var(--led-size) * 3) #00dcd8;
+}
+
 .hero__music {
   position: absolute;
   top: calc(171.377 * var(--u));
@@ -624,6 +646,10 @@ h1 span {
   animation: character-in 400ms var(--ease-out) both;
 }
 
+.motion-ready [data-reveal='indicator'].is-revealed:not(.is-finished) {
+  animation: headphones-on 1800ms ease-in-out 400ms both;
+}
+
 .motion-ready [data-reveal='bubble'].is-revealed:not(.is-finished) {
   animation: bubble-in 300ms var(--ease-out) both;
 }
@@ -674,6 +700,20 @@ h1 span {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes headphones-on {
+  0%,
+  25%,
+  50% {
+    opacity: 0.15;
+  }
+  12.5%,
+  37.5%,
+  70%,
+  100% {
+    opacity: 1;
   }
 }
 
