@@ -57,7 +57,13 @@
         <div class="hero__art" data-reveal="character" data-motion-once>
           <img
             class="hero__character"
-            src="/images/max-headphones.png"
+            src="/images/max-headphones.webp"
+            srcset="
+              /images/max-headphones-640.webp  640w,
+              /images/max-headphones-960.webp  960w,
+              /images/max-headphones.webp     1383w
+            "
+            sizes="(max-width: 640px) 100vw, (max-width: 900px) 640px, (max-width: 1440px) 57.44vw, 828px"
             width="1383"
             height="1137"
             alt="Макс рассматривает новые оранжевые наушники."
@@ -125,7 +131,7 @@
         <figure class="shared__photo">
           <div class="shared__image-window">
             <img
-              src="/images/headphones-photo.png"
+              src="/images/headphones-photo.webp"
               width="1536"
               height="1024"
               alt="Наушники в коробке. Под ней — банковская карта."
@@ -149,7 +155,7 @@
         <div class="detail__viewport" data-zoom>
           <img
             class="detail__photo"
-            src="/images/headphones-photo.png"
+            src="/images/headphones-photo.webp"
             width="1536"
             height="1024"
             alt="Карта под коробкой. Код безопасности виден на снимке."
@@ -208,7 +214,13 @@
           <div class="help__question" data-motion-block>
             <img
               class="help__character"
-              src="/images/max-thinking.png"
+              src="/images/max-thinking.webp"
+              srcset="
+                /images/max-thinking-384.webp  384w,
+                /images/max-thinking-640.webp  640w,
+                /images/max-thinking.webp     1024w
+              "
+              sizes="(max-width: 640px) 56.07vw, (max-width: 900px) 359px, (max-width: 1440px) 25.93vw, 374px"
               width="1024"
               height="1536"
               alt="Макс задумался и спрашивает, что теперь делать."
@@ -378,7 +390,7 @@
           <div class="frame-check__stage">
             <div class="frame-check__photo">
               <img
-                src="/images/headphones-photo.png"
+                src="/images/headphones-photo.webp"
                 width="1536"
                 height="1024"
                 alt="Наушники в коробке. Справа из-под неё видна карта."
