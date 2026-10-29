@@ -1,18 +1,59 @@
+import { playTitleDust } from './title-dust.js'
+
 export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
   if (!root) return () => {}
 
   const photo = root.querySelector('.shared__photo')
   const receipt = root.querySelector('.shared__receipt')
+  const heading = root.querySelector('.shared__title')
   const title = root.querySelector('[data-story-title]')
   const image = photo.querySelector('img')
+  const initialTitle = 'Макс хочет отправить\nснимок в чат'
+  const sentTitle = 'Макс отправил\nснимок в чат'
   let unsubscribe = () => {}
   let frame = null
+  let cancelDust = null
   let playing = false
   let disposed = false
   let generation = 0
+  let titleGeneration = 0
+
+  function cancelTitle() {
+    titleGeneration += 1
+    cancelDust?.()
+    cancelDust = null
+  }
+
+  function labelTitle(text) {
+    const label = text.replace('\n', ' ')
+
+    if (heading.getAttribute('aria-label') !== label) {
+      heading.setAttribute('aria-label', label)
+    }
+  }
 
   function setTitle(sent) {
-    title.textContent = sent ? 'Макс отправил' : 'Макс хочет отправить'
+    cancelTitle()
+    const text = sent ? sentTitle : initialTitle
+    title.textContent = text
+    labelTitle(text)
+    root.classList.toggle('is-title-settled', sent)
+  }
+
+  function diffuseTitle() {
+    if (cancelDust) return
+
+    const current = ++titleGeneration
+    labelTitle(sentTitle)
+    cancelDust = playTitleDust(title, {
+      from: initialTitle,
+      to: sentTitle,
+      onFinish: () => {
+        if (disposed || current !== titleGeneration) return
+        cancelDust = null
+        setTitle(true)
+      }
+    })
   }
 
   function reset() {
@@ -24,11 +65,11 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
     root.classList.add('is-story-ready')
   }
 
-  function finish() {
+  function finish({ preserveTitle = false } = {}) {
     generation += 1
     playing = false
     cancelAnimationFrame(frame)
-    setTitle(true)
+    if (!preserveTitle) setTitle(true)
     root.classList.add('is-frame-open', 'is-photo-sent')
     root.classList.remove('is-story-ready', 'is-story-playing')
   }
@@ -59,16 +100,18 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
   }
 
   function onAnimationEnd(event) {
-    if (disposed || !playing || !root.classList.contains('is-story-playing')) {
+    if (disposed) return
+
+    if (!playing || !root.classList.contains('is-story-playing')) {
       return
     }
 
     if (event.target === photo && event.animationName === 'photo-sends') {
-      setTitle(true)
+      diffuseTitle()
     }
 
-    if (event.target === receipt && event.animationName === 'receipt-arrives') {
-      finish()
+    if (event.target === receipt && event.animationName === 'chat-arrives') {
+      finish({ preserveTitle: true })
     }
   }
 
@@ -88,7 +131,7 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
   }
 
   function onVisibilityChange() {
-    if (document.hidden && playing) finish()
+    if (document.hidden && (playing || cancelDust)) finish()
   }
 
   root.classList.add('is-story-enhanced')
@@ -112,7 +155,8 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
       'is-story-ready',
       'is-story-playing',
       'is-frame-open',
-      'is-photo-sent'
+      'is-photo-sent',
+      'is-title-settled'
     )
   }
 }

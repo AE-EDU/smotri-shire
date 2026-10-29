@@ -2,7 +2,7 @@
   --frame-open-time: 850ms;
   --card-pause: 1000ms;
   --photo-send-delay: calc(var(--frame-open-time) + var(--card-pause));
-  --photo-sent: translate(2.5%, 0) rotate(-2deg) scale(0.86);
+  --photo-sent: rotate(-2deg) scale(0.94);
   --photo-shadow:
     0 0 0 calc(12 * var(--u)) var(--paper),
     0 calc(16 * var(--u)) calc(40 * var(--u)) rgb(38 51 69 / 16%);
@@ -13,8 +13,21 @@
   height: 100%;
 }
 
-.is-story-enhanced .shared__photo::after {
-  display: none;
+.shared__title [data-story-title] {
+  position: relative;
+  display: block;
+  white-space: pre-line;
+}
+
+.shared__title-dust {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.shared__title .is-dust-active {
+  color: transparent;
 }
 
 .is-photo-sent .shared__photo {
@@ -80,11 +93,10 @@
 .shared__receipt {
   display: none;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: calc(-24 * var(--u));
-  font-size: clamp(14px, 1.25cqw, 18px);
-  line-height: 24px;
+  gap: 10px;
+  min-height: 28px;
+  font-size: clamp(16px, 1.3889cqw, 20px);
+  line-height: 1.4;
 }
 
 .is-story-enhanced .shared__receipt {
@@ -92,20 +104,21 @@
 }
 
 .shared__sent {
+  display: block;
+  flex: none;
+  width: 28px;
+  height: 20px;
   color: var(--navy);
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.3em;
-  margin-right: 6px;
 }
 
 .is-story-ready .shared__image-window {
   clip-path: inset(22% 40% 18% 18%);
 }
 
-.is-story-ready .speech--photo,
-.is-story-ready .shared__receipt {
+.is-story-enhanced:not(.is-title-settled) .speech--photo,
+.is-story-enhanced:not(.is-title-settled) .shared__receipt {
   opacity: 0;
+  visibility: hidden;
 }
 
 .is-story-playing .shared__image-window {
@@ -120,14 +133,9 @@
   animation: photo-sends 600ms var(--ease-out) var(--photo-send-delay) both;
 }
 
-.is-story-playing .speech--photo {
-  animation: message-arrives 450ms var(--ease-out) both;
-  animation-delay: calc(var(--photo-send-delay) + 300ms);
-}
-
-.is-story-playing .shared__receipt {
-  animation: receipt-arrives 250ms var(--ease-out) both;
-  animation-delay: calc(var(--photo-send-delay) + 650ms);
+.is-story-playing.is-title-settled .speech--photo,
+.is-story-playing.is-title-settled .shared__receipt {
+  animation: chat-arrives 650ms var(--ease-out) 1s both;
 }
 
 @keyframes frame-opens {
@@ -169,77 +177,38 @@
   }
 }
 
-@keyframes message-arrives {
+@keyframes chat-arrives {
   from {
     opacity: 0;
-    transform: translate(24px, 12px) rotate(3deg) scale(0.94);
   }
   to {
     opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes receipt-arrives {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
   }
 }
 
 @media (max-width: 900px) {
   .shared {
-    --photo-sent: translate(0, 0) rotate(-2deg) scale(0.88);
+    --photo-sent: rotate(-2deg) scale(0.94);
     --photo-shadow: 0 0 0 8px var(--paper), 0 12px 32px rgb(38 51 69 / 16%);
-    padding-bottom: 24px;
-  }
-
-  .shared__message {
-    display: contents;
-  }
-
-  .shared__title {
-    margin: 0 24px 20px;
-  }
-
-  .shared__photo {
-    order: 1;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    margin-block: 8px 24px;
-  }
-
-  .shared__photo img {
-    object-fit: contain;
-  }
-
-  .speech--photo {
-    order: 2;
-    align-self: flex-end;
-    margin: 0 24px 8px;
-  }
-
-  .shared__receipt {
-    order: 3;
-    align-self: flex-end;
-    gap: 10px;
-    margin: 0 24px;
-    font-size: 14px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .shared__title-dust {
+    display: none;
+  }
+
+  .shared__title .is-dust-active {
+    color: inherit;
+  }
+
   .is-story-ready .shared__image-window {
     clip-path: none;
   }
 
-  .is-story-ready .speech--photo,
-  .is-story-ready .shared__receipt {
-    opacity: 1;
+  .is-story-playing.is-title-settled .speech--photo,
+  .is-story-playing.is-title-settled .shared__receipt {
+    animation: none;
   }
 
   .shared__viewfinder {

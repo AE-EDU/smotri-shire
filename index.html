@@ -78,7 +78,12 @@
     </noscript>
     <a class="skip-link" href="#story">Перейти к истории</a>
     <main class="longread" id="story">
-      <section class="hero" aria-labelledby="story-title" data-motion-block>
+      <section
+        class="hero"
+        aria-labelledby="story-title"
+        data-motion-block
+        data-motion-entry="visible"
+      >
         <header class="page-header container">
           <p>Смотри шире</p>
           <p class="page-header__genre">
@@ -106,7 +111,12 @@
               /images/max-headphones-960.webp  960w,
               /images/max-headphones.webp     1383w
             "
-            sizes="(max-width: 640px) 100vw, (max-width: 900px) 640px, (max-width: 1440px) 57.44vw, 828px"
+            sizes="
+              (max-width: 640px) 100vw,
+              (max-width: 900px) 640px,
+              (max-width: 1440px) 57.44vw,
+              828px
+            "
             width="1383"
             height="1137"
             alt="Макс рассматривает новые оранжевые наушники."
@@ -147,28 +157,48 @@
         data-story-motion
       >
         <div class="shared__message">
-          <h2 class="shared__title" id="shared-title">
-            <span data-story-title>Макс отправил</span><br />
-            снимок в чат
+          <h2
+            class="shared__title"
+            id="shared-title"
+            aria-label="Макс отправил снимок в чат"
+          >
+            <span data-story-title aria-hidden="true"
+              >Макс отправил&#10;снимок в чат</span
+            >
           </h2>
-          <div class="speech speech--photo">
-            <picture class="speech__outline" aria-hidden="true">
-              <source
-                media="(max-width: 900px)"
-                srcset="/images/bubble-photo-mobile.svg"
-              />
-              <img
-                src="/images/bubble-photo-desktop.svg"
-                width="464"
-                height="328"
-                alt=""
-              />
-            </picture>
-            <p>Смотрите,<br />какие!</p>
-          </div>
-          <div class="shared__receipt">
-            <span class="shared__sent" aria-hidden="true">✓✓</span>
-            <span>Фото в чате</span>
+          <div class="shared__chat">
+            <div class="speech speech--photo">
+              <picture class="speech__outline" aria-hidden="true">
+                <source
+                  media="(max-width: 900px)"
+                  srcset="/images/bubble-photo-mobile.svg"
+                />
+                <img
+                  src="/images/bubble-photo-desktop.svg"
+                  width="464"
+                  height="328"
+                  alt=""
+                />
+              </picture>
+              <p>Смотрите,<br />какие!</p>
+            </div>
+            <div class="shared__receipt">
+              <svg
+                class="shared__sent"
+                width="28"
+                height="20"
+                viewBox="0 0 28 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m2 10 5 5L19 3M13 13l2 2L27 3" />
+              </svg>
+              <span>Фото в чате</span>
+            </div>
           </div>
         </div>
         <figure class="shared__photo">
@@ -205,57 +235,78 @@
             decoding="async"
             loading="lazy"
           />
-          <picture class="detail__pointer" aria-hidden="true">
-            <source
-              media="(max-width: 900px)"
-              srcset="/images/pointer-mobile.svg"
-            />
-            <img
-              src="/images/pointer-desktop.svg"
-              width="82"
-              height="8"
-              alt=""
-            />
-          </picture>
-          <picture class="detail__dot" aria-hidden="true">
-            <source
-              media="(max-width: 900px)"
-              srcset="/images/pointer-dot-mobile.svg"
-            />
-            <img
-              src="/images/pointer-dot-desktop.svg"
-              width="6"
-              height="6"
-              alt=""
-            />
-          </picture>
-          <p class="detail__label">Это код<br />безопасности</p>
-        </div>
-      </section>
-
-      <section
-        class="rule container"
-        aria-labelledby="rule-title"
-        data-motion-block
-      >
-        <div class="rule__body">
-          <svg
-            class="rule__prohibition"
-            data-reveal="prohibition"
-            width="44"
-            height="44"
-            viewBox="0 0 44 44"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="4.5"
-            stroke-linecap="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <circle cx="22" cy="22" r="18" />
-            <path d="M9.3 9.3 34.7 34.7" />
-          </svg>
-          <p id="rule-title">Не показывай его <span>даже друзьям</span></p>
+          <div class="detail__annotation">
+            <svg
+              class="detail__connector detail__connector--desktop"
+              width="388"
+              height="120"
+              viewBox="0 0 388 120"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                class="detail__line"
+                d="M0 60 C36 58 74 60 108 60"
+                pathLength="1"
+              />
+              <circle cx="0" cy="60" r="3" fill="currentColor" stroke="none" />
+            </svg>
+            <svg
+              class="detail__connector detail__connector--mobile"
+              width="176"
+              height="172"
+              viewBox="0 0 176 172"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                class="detail__line"
+                d="M88 80 C84 118 38 150 16 172"
+                pathLength="1"
+              />
+              <circle
+                cx="16"
+                cy="172"
+                r="3"
+                fill="currentColor"
+                stroke="none"
+              />
+            </svg>
+            <p class="detail__label">
+              <span>Это код<br />безопасности</span>
+            </p>
+          </div>
+          <div class="rule">
+            <p class="rule__body">
+              Не показывай его
+              <span class="rule__ending">
+                даже друзьям
+                <svg
+                  class="rule__prohibition"
+                  width="44"
+                  height="44"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="4.5"
+                  stroke-linecap="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="22" cy="22" r="18" />
+                  <path d="M9.3 9.3 34.7 34.7" />
+                </svg>
+              </span>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -271,7 +322,12 @@
                 /images/max-thinking-640.webp  640w,
                 /images/max-thinking.webp     1024w
               "
-              sizes="(max-width: 640px) 56.07vw, (max-width: 900px) 359px, (max-width: 1440px) 25.93vw, 374px"
+              sizes="
+                (max-width: 640px) 56.07vw,
+                (max-width: 900px) 359px,
+                (max-width: 1440px) 25.93vw,
+                374px
+              "
               width="1024"
               height="1536"
               alt="Макс задумался и спрашивает, что теперь делать."
@@ -296,8 +352,13 @@
           </div>
         </div>
 
-        <div class="guide" data-guide>
-          <h3 class="guide__label" id="guide-title">Гайд</h3>
+        <div
+          class="guide"
+          id="guide-title"
+          role="region"
+          aria-label="Советы"
+          data-guide
+        >
           <div class="guide__card">
             <div
               class="guide__tabs"
@@ -415,18 +476,18 @@
         >
           <div class="frame-check__intro">
             <p class="frame-check__eyebrow">Твоя очередь</p>
-            <h3 id="frame-check-title">Что здесь стоит оставить за кадром?</h3>
+            <h3 id="frame-check-title">Найди лишнее в кадре</h3>
             <p id="frame-check-instruction">
-              Нажми на деталь, которую не стоит отправлять друзьям.
+              Нажми на деталь, которой не место в чате.
             </p>
           </div>
           <div class="frame-check__stage">
             <div class="frame-check__photo">
               <img
-                src="/images/headphones-photo.webp"
+                src="/images/cat-in-box.jpg"
                 width="1536"
                 height="1024"
-                alt="Наушники в коробке. Справа из-под неё видна карта."
+                alt="Рыжий кот в коробке. Справа внизу наклейка с адресом."
                 loading="lazy"
                 decoding="async"
               />
@@ -434,24 +495,29 @@
             <button
               class="frame-check__target"
               type="button"
-              aria-label="Банковская карта справа от коробки"
+              aria-label="Наклейка с адресом и телефоном справа внизу коробки"
               aria-describedby="frame-check-instruction"
-              data-card-target
+              data-private-target
             ></button>
             <span class="frame-check__outline" aria-hidden="true"></span>
-            <span class="frame-check__crop" aria-hidden="true"></span>
+            <span class="frame-check__mask" aria-hidden="true">
+              <img
+                src="/images/cat-in-box-clean.jpg"
+                width="1536"
+                height="1024"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                data-clean-photo
+              />
+            </span>
           </div>
           <p class="frame-check__fallback">
-            Карта справа от коробки должна остаться за кадром.
+            Кота можно показать, а адрес и телефон на коробке лучше скрыть.
           </p>
           <div class="frame-check__response">
-            <p
-              class="frame-check__status"
-              role="status"
-              aria-live="polite"
-              data-check-status
-            >
-              Перед отправкой проверь весь снимок.
+            <p class="frame-check__status" role="status" aria-live="polite">
+              <span data-check-status> Что стоит скрыть перед отправкой? </span>
             </p>
             <button class="frame-check__reset" type="button" data-check-reset>
               Попробовать ещё раз
@@ -469,14 +535,32 @@
           </div>
         </aside>
         <footer class="page-footer">
-          <p>Смотри шире</p>
-          <a
-            href="https://www.cbr.ru/Reception/TopicalMessage/Page/3401"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            О данных карты — Банк России
-          </a>
+          <dl class="page-footer__credits">
+            <div>
+              <dt>Источник</dt>
+              <dd>
+                <a
+                  href="https://www.cbr.ru/Reception/TopicalMessage/Page/3401"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  О данных карты — Банк России
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt>Группа</dt>
+              <dd>БП25Д312</dd>
+            </div>
+            <div>
+              <dt>Студент</dt>
+              <dd>Ендовицкая Елена</dd>
+            </div>
+            <div>
+              <dt>Куратор</dt>
+              <dd>Гриднев Сергей</dd>
+            </div>
+          </dl>
         </footer>
       </section>
     </main>

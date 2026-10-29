@@ -1,0 +1,28 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1536"
+  height="1024"
+  viewBox="0 0 1536 1024"
+>
+  <defs>
+    <filter
+      id="feather"
+      x="-10%"
+      y="-15%"
+      width="120%"
+      height="130%"
+      color-interpolation-filters="sRGB"
+    >
+      <feGaussianBlur stdDeviation="8" />
+    </filter>
+  </defs>
+  <rect
+    x="960"
+    y="560"
+    width="420"
+    height="320"
+    rx="16"
+    fill="white"
+    filter="url(#feather)"
+  />
+</svg>

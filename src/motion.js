@@ -77,12 +77,17 @@ export function initMotion(root, { reducedMotion, visibility } = {}) {
 
     root.classList.add('motion-ready')
     subscriptions = scenes.map((scene) => {
-      const once = scene.elements.filter((element) =>
-        element.hasAttribute('data-motion-once')
-      )
+      const visibleTargets =
+        scene.block.getAttribute('data-motion-entry') === 'visible'
+          ? scene.elements
+          : scene.elements.filter((element) =>
+              element.hasAttribute('data-motion-once')
+            )
 
       return visibility.observe(scene.block, {
-        onVisible: once.length ? () => void reveal(scene, once) : undefined,
+        onVisible: visibleTargets.length
+          ? () => void reveal(scene, visibleTargets)
+          : undefined,
         onEnter: () => void reveal(scene),
         onExit: () => reset(scene)
       })
