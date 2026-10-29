@@ -1129,6 +1129,15 @@ h1 span {
   .motion-ready [data-zoom].is-revealed:not(.is-finished) .detail__photo {
     animation: none;
   }
+
+  .motion-ready [data-zoom].is-revealed:not(.is-finished) .detail__label {
+    animation-delay: var(--detail-delay);
+  }
+
+  .motion-ready [data-zoom].is-revealed:not(.is-finished) .detail__line,
+  .motion-ready [data-zoom].is-revealed:not(.is-finished) .detail__connector {
+    animation-delay: calc(var(--detail-delay) + 180ms);
+  }
 }
 
 @media (max-width: 359px) {

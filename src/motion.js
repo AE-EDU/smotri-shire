@@ -106,7 +106,7 @@ export function initMotion(root, { reducedMotion, visibility } = {}) {
       target.classList.add('is-finished')
     }
 
-    if (target.matches('.detail__label')) {
+    if (target.matches('.rule') && event.animationName === 'appear') {
       const viewport = target.closest('[data-zoom]')
 
       if (viewport?.classList.contains('is-revealed')) {
