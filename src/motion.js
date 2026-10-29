@@ -38,8 +38,8 @@ export function initMotion(root, { reducedMotion, visibility } = {}) {
     subscriptions = []
   }
 
-  async function reveal(scene) {
-    const current = ++scene.generation
+  async function reveal(scene, targets = scene.elements) {
+    const current = scene.generation
     const images = new Set(
       scene.elements.flatMap((element) =>
         element.matches('img')
@@ -58,7 +58,7 @@ export function initMotion(root, { reducedMotion, visibility } = {}) {
 
     if (disposed || current !== scene.generation) return
 
-    scene.elements.forEach((element) => {
+    targets.forEach((element) => {
       element.classList.add('is-revealed')
     })
   }
@@ -76,12 +76,17 @@ export function initMotion(root, { reducedMotion, visibility } = {}) {
     }
 
     root.classList.add('motion-ready')
-    subscriptions = scenes.map((scene) =>
-      visibility.observe(scene.block, {
+    subscriptions = scenes.map((scene) => {
+      const once = scene.elements.filter((element) =>
+        element.hasAttribute('data-motion-once')
+      )
+
+      return visibility.observe(scene.block, {
+        onVisible: once.length ? () => void reveal(scene, once) : undefined,
         onEnter: () => void reveal(scene),
         onExit: () => reset(scene)
       })
-    )
+    })
   }
 
   function onAnimationEnd(event) {

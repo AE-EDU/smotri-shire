@@ -39,9 +39,14 @@ export function createSceneVisibility() {
         continue
       }
 
-      if (!scene.visible) scene.entryDirection = direction
-      scene.visible = true
-      if (scene.active) continue
+      if (!scene.visible) {
+        scene.entryDirection = direction
+        scene.visible = true
+        scene.onVisible?.()
+      }
+
+      if (disposed) return
+      if (!scenes.has(scene) || scene.active) continue
 
       const contained = bounds.top >= -1 && bounds.bottom <= viewportHeight + 1
       const trailingEdgeVisible =
@@ -67,11 +72,12 @@ export function createSceneVisibility() {
   window.addEventListener('resize', schedule)
 
   return {
-    observe(element, { onEnter, onExit } = {}) {
+    observe(element, { onVisible, onEnter, onExit } = {}) {
       if (disposed) return () => {}
 
       const scene = {
         element,
+        onVisible,
         onEnter,
         onExit,
         visible: false,
