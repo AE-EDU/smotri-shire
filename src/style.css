@@ -944,10 +944,11 @@ h1 span {
   }
 
   .detail__label {
-    left: 0;
-    width: 100%;
-    height: calc(80 * var(--m));
-    padding: calc(12 * var(--m));
+    top: calc(3 * var(--m));
+    left: calc(7 * var(--m));
+    width: calc(162 * var(--m));
+    height: calc(74 * var(--m));
+    padding: calc(10 * var(--m));
     border-radius: calc(14 * var(--m));
     font-size: clamp(16px, 4.6154cqw, 24px);
     line-height: 1.3;
