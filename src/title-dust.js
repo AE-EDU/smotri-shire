@@ -1,8 +1,9 @@
-export function playTitleDust(title, { from, to, onFinish }) {
+export function playTitleDust(title, { from, to, onReveal, onFinish }) {
   const previousHeight = title.style.minHeight
   let canvas = null
   let frame = null
   let cancelled = false
+  let revealed = false
 
   function cancel() {
     if (cancelled) return
@@ -68,6 +69,12 @@ export function playTitleDust(title, { from, to, onFinish }) {
       if (start === null) start = time
 
       const elapsed = time - start
+      if (!revealed && elapsed >= 1620) {
+        revealed = true
+        onReveal?.()
+        if (cancelled) return
+      }
+
       const reveal = clamp((elapsed - 1620) / 180)
       const dustOpacity = clamp(elapsed / 120) * (1 - reveal)
       context.clearRect(0, 0, canvas.width / ratio, canvas.height / ratio)

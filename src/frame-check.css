@@ -243,11 +243,19 @@
   .frame-check {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
-    padding: 20px;
+    padding: 32px 24px 24px;
   }
 
   .frame-check__intro {
     gap: 16px;
+  }
+
+  .frame-check__eyebrow {
+    max-width: 100%;
+    padding: 10px 14px;
+    font-size: clamp(16px, 4.6cqw, 18px);
+    transform: rotate(-2deg);
+    transform-origin: center;
   }
 
   .frame-check h3 {
@@ -268,7 +276,15 @@
   }
 
   .frame-check__status {
-    min-height: 78px;
+    min-height: 52px;
+  }
+
+  .frame-check__reset {
+    display: none;
+  }
+
+  .frame-check.is-found .frame-check__reset {
+    display: block;
   }
 }
 

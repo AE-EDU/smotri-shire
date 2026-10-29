@@ -38,6 +38,7 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
     title.textContent = text
     labelTitle(text)
     root.classList.toggle('is-title-settled', sent)
+    root.classList.toggle('is-chat-visible', sent)
   }
 
   function diffuseTitle() {
@@ -48,6 +49,10 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
     cancelDust = playTitleDust(title, {
       from: initialTitle,
       to: sentTitle,
+      onReveal: () => {
+        if (disposed || current !== titleGeneration) return
+        root.classList.add('is-chat-visible')
+      },
       onFinish: () => {
         if (disposed || current !== titleGeneration) return
         cancelDust = null
@@ -156,7 +161,8 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
       'is-story-playing',
       'is-frame-open',
       'is-photo-sent',
-      'is-title-settled'
+      'is-title-settled',
+      'is-chat-visible'
     )
   }
 }
