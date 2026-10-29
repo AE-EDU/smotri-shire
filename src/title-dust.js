@@ -26,6 +26,8 @@ export function playTitleDust(title, { from, to, onReveal, onFinish }) {
     if (cancelled) return
 
     const style = getComputedStyle(title)
+    const scale = Number(style.getPropertyValue('--story-time-scale'))
+    const timeScale = Number.isFinite(scale) && scale > 0 ? scale : 1
     const width = Math.ceil(title.getBoundingClientRect().width)
     const padding = 96
     const limit = window.innerWidth <= 900 ? 720 : 1000
@@ -68,7 +70,7 @@ export function playTitleDust(title, { from, to, onReveal, onFinish }) {
       if (cancelled) return
       if (start === null) start = time
 
-      const elapsed = time - start
+      const elapsed = (time - start) / timeScale
       if (!revealed && elapsed >= 1620) {
         revealed = true
         onReveal?.()
