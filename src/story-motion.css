@@ -2,8 +2,6 @@
   --story-time-scale: 0.72;
   --photo-time-scale: 0.64;
   --frame-open-time: calc(850ms * var(--photo-time-scale));
-  --card-pause: calc(1000ms * var(--story-time-scale));
-  --photo-send-delay: calc(var(--frame-open-time) + var(--card-pause));
   --photo-sent: rotate(-2deg) scale(0.94);
   --photo-shadow:
     0 0 0 calc(12 * var(--u)) var(--paper),
@@ -134,7 +132,7 @@
 
 .is-story-playing .shared__photo {
   animation: photo-sends calc(600ms * var(--photo-time-scale)) var(--ease-out)
-    var(--photo-send-delay) both;
+    both;
 }
 
 .is-story-playing.is-chat-visible .speech--photo,

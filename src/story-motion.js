@@ -17,6 +17,8 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
   let disposed = false
   let generation = 0
   let titleGeneration = 0
+  let titleDone = false
+  let chatDone = false
 
   function cancelTitle() {
     titleGeneration += 1
@@ -45,18 +47,30 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
     if (cancelDust) return
 
     const current = ++titleGeneration
-    labelTitle(sentTitle)
     cancelDust = playTitleDust(title, {
       from: initialTitle,
       to: sentTitle,
+      onStart: () => {
+        if (disposed || current !== titleGeneration) return
+        labelTitle(sentTitle)
+        root.classList.add('is-story-playing')
+      },
       onReveal: () => {
         if (disposed || current !== titleGeneration) return
         root.classList.add('is-chat-visible')
       },
-      onFinish: () => {
+      onFinish: ({ completed }) => {
         if (disposed || current !== titleGeneration) return
         cancelDust = null
+
+        if (!completed || !root.classList.contains('is-story-playing')) {
+          finish()
+          return
+        }
+
         setTitle(true)
+        titleDone = true
+        if (chatDone) finish()
       }
     })
   }
@@ -64,17 +78,21 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
   function reset() {
     generation += 1
     playing = false
+    titleDone = false
+    chatDone = false
     cancelAnimationFrame(frame)
     setTitle(false)
     root.classList.remove('is-frame-open', 'is-photo-sent', 'is-story-playing')
     root.classList.add('is-story-ready')
   }
 
-  function finish({ preserveTitle = false } = {}) {
+  function finish() {
     generation += 1
     playing = false
+    titleDone = true
+    chatDone = true
     cancelAnimationFrame(frame)
-    if (!preserveTitle) setTitle(true)
+    setTitle(true)
     root.classList.add('is-frame-open', 'is-photo-sent')
     root.classList.remove('is-story-ready', 'is-story-playing')
   }
@@ -82,6 +100,8 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
   async function play() {
     const current = ++generation
     playing = true
+    titleDone = false
+    chatDone = false
     cancelAnimationFrame(frame)
     setTitle(false)
     root.classList.remove('is-frame-open', 'is-photo-sent', 'is-story-playing')
@@ -100,24 +120,20 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
 
     frame = requestAnimationFrame(() => {
       if (disposed || current !== generation) return
-      root.classList.add('is-story-playing')
+      diffuseTitle()
     })
   }
 
   function onAnimationEnd(event) {
-    if (disposed) return
-
-    if (!playing || !root.classList.contains('is-story-playing')) {
+    if (disposed || !playing || !root.classList.contains('is-chat-visible')) {
+      return
+    }
+    if (event.target !== receipt || event.animationName !== 'chat-arrives') {
       return
     }
 
-    if (event.target === photo && event.animationName === 'photo-sends') {
-      diffuseTitle()
-    }
-
-    if (event.target === receipt && event.animationName === 'chat-arrives') {
-      finish({ preserveTitle: true })
-    }
+    chatDone = true
+    if (titleDone) finish()
   }
 
   function configure() {
@@ -148,6 +164,8 @@ export function initStoryMotion(root, { reducedMotion, visibility } = {}) {
 
   return () => {
     disposed = true
+    titleDone = false
+    chatDone = false
     generation += 1
     cancelAnimationFrame(frame)
     unsubscribe()

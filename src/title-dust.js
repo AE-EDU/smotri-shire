@@ -1,4 +1,7 @@
-export function playTitleDust(title, { from, to, onReveal, onFinish }) {
+export function playTitleDust(
+  title,
+  { from, to, onStart, onReveal, onFinish }
+) {
   const previousHeight = title.style.minHeight
   let canvas = null
   let frame = null
@@ -15,10 +18,10 @@ export function playTitleDust(title, { from, to, onReveal, onFinish }) {
     title.style.minHeight = previousHeight
   }
 
-  function finish() {
+  function finish({ completed = false } = {}) {
     if (cancelled) return
     cancel()
-    onFinish()
+    onFinish({ completed })
   }
 
   async function prepare() {
@@ -59,6 +62,7 @@ export function playTitleDust(title, { from, to, onReveal, onFinish }) {
 
     context.scale(ratio, ratio)
     context.fillStyle = style.color
+    context.drawImage(source.mask, 0, 0)
     title.style.minHeight = `${height}px`
     title.classList.add('is-dust-active')
     title.append(canvas)
@@ -68,7 +72,11 @@ export function playTitleDust(title, { from, to, onReveal, onFinish }) {
 
     function draw(time) {
       if (cancelled) return
-      if (start === null) start = time
+      if (start === null) {
+        start = time
+        onStart?.()
+        if (cancelled) return
+      }
 
       const elapsed = (time - start) / timeScale
       if (!revealed && elapsed >= 1620) {
@@ -106,7 +114,7 @@ export function playTitleDust(title, { from, to, onReveal, onFinish }) {
       context.globalAlpha = reveal
       context.drawImage(target.mask, 0, 0)
 
-      if (elapsed >= 1800) finish()
+      if (elapsed >= 1800) finish({ completed: true })
       else frame = requestAnimationFrame(draw)
     }
 
