@@ -253,6 +253,9 @@ h1 span {
 }
 
 .shared__title {
+  padding: calc(16 * var(--u)) calc(24 * var(--u));
+  border-radius: var(--radius);
+  background: var(--paper);
   font-family: 'Golos Text', sans-serif;
   font-size: calc(28 * var(--u));
   font-weight: 400;
@@ -297,7 +300,7 @@ h1 span {
 .detail {
   --detail-delay: 700ms;
   position: relative;
-  height: calc(810 * var(--u));
+  height: calc(900 * var(--u));
   overflow: clip;
   background: var(--sky);
 }
@@ -381,16 +384,12 @@ h1 span {
   line-height: calc(44 * var(--u));
 }
 
-.rule__lock {
+.rule__prohibition {
   display: block;
   flex: none;
   width: calc(44 * var(--u));
-}
-
-.rule__lock img {
-  display: block;
-  width: 100%;
   height: auto;
+  color: #e3433d;
 }
 
 .help {
@@ -448,6 +447,7 @@ h1 span {
 }
 
 .guide__card {
+  border: 2px solid var(--navy);
   border-radius: var(--radius);
   background: var(--white);
 }
@@ -456,7 +456,7 @@ h1 span {
   display: none;
   gap: calc(16 * var(--u));
   padding: calc(16 * var(--u));
-  border-radius: var(--radius) var(--radius) 0 0;
+  border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0;
   background: var(--navy);
 }
 
@@ -470,9 +470,9 @@ h1 span {
   min-height: 48px;
   height: calc(56 * var(--u));
   padding: 0 calc(16 * var(--u));
-  border: 0;
+  border: 2px solid rgb(255 249 242 / 65%);
   border-radius: var(--radius);
-  background: transparent;
+  background: rgb(255 249 242 / 10%);
   color: var(--white);
   font-size: calc(24 * var(--u));
   font-weight: 600;
@@ -481,6 +481,7 @@ h1 span {
 }
 
 .guide__tabs button[aria-selected='true'] {
+  border-color: var(--paper);
   background: var(--paper);
   color: var(--navy);
 }
@@ -529,7 +530,7 @@ h1 span {
 
 .guide__advice + .guide__advice {
   padding-top: calc(24 * var(--u));
-  border-top: 1px solid rgb(38 51 69 / 15%);
+  border-top: 2px solid rgb(38 51 69 / 40%);
 }
 
 .guide__advice h4 {
@@ -540,6 +541,8 @@ h1 span {
 }
 
 .closing {
+  --frame-stroke: 2px;
+  --frame-color: rgb(255 249 242 / 65%);
   display: flex;
   flex-direction: column;
   gap: calc(56 * var(--u));
@@ -564,21 +567,53 @@ h1 span {
   line-height: calc(38 * var(--u));
 }
 
+.closing__check span {
+  color: var(--sky);
+}
+
 .closing__corners {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.closing__corners-desktop {
-  display: block;
-  width: 100%;
-  height: auto;
+.closing__corners::before,
+.closing__corners::after,
+.closing__opposite-corners::before,
+.closing__opposite-corners::after {
+  position: absolute;
+  width: calc(40 * var(--u));
+  height: calc(48 * var(--u));
+  border: 0 solid var(--frame-color);
+  content: '';
 }
 
-.closing__corner-top,
-.closing__corner-bottom {
-  display: none;
+.closing__corners::before {
+  top: 0;
+  left: 0;
+  border-top-width: var(--frame-stroke);
+  border-left-width: var(--frame-stroke);
+}
+
+.closing__corners::after {
+  right: 0;
+  bottom: 0;
+  border-right-width: var(--frame-stroke);
+  border-bottom-width: var(--frame-stroke);
+}
+
+.closing__opposite-corners::before {
+  top: 0;
+  right: 0;
+  border-top-width: var(--frame-stroke);
+  border-right-width: var(--frame-stroke);
+}
+
+.closing__opposite-corners::after {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: var(--frame-stroke);
+  border-left-width: var(--frame-stroke);
 }
 
 .parent-note {
@@ -655,7 +690,7 @@ h1 span {
   animation: bubble-in 300ms var(--ease-out) both;
 }
 
-.motion-ready [data-reveal='lock'].is-revealed:not(.is-finished) {
+.motion-ready [data-reveal='prohibition'].is-revealed:not(.is-finished) {
   animation-duration: 200ms;
 }
 
@@ -838,6 +873,7 @@ h1 span {
   }
 
   .shared__title {
+    padding: 12px 8px;
     font-size: 20px;
     line-height: 28px;
   }
@@ -891,7 +927,6 @@ h1 span {
   }
 
   .detail__heading span,
-  .rule h2 span,
   .rule__body p span {
     display: block;
   }
@@ -899,7 +934,7 @@ h1 span {
   .detail__viewport {
     position: relative;
     inset: auto;
-    height: calc(300 * var(--m));
+    height: calc(420 * var(--m));
     background: var(--sky);
   }
 
@@ -942,7 +977,7 @@ h1 span {
     line-height: 28px;
   }
 
-  .rule__lock {
+  .rule__prohibition {
     width: 28px;
   }
 
@@ -1045,26 +1080,14 @@ h1 span {
   }
 
   .desktop,
-  .closing__corners-desktop {
+  .closing__opposite-corners {
     display: none;
   }
 
-  .closing__corner-top,
-  .closing__corner-bottom {
-    position: absolute;
-    display: block;
-    width: 20.5px;
-    height: auto;
-  }
-
-  .closing__corner-top {
-    top: -0.5px;
-    left: -0.5px;
-  }
-
-  .closing__corner-bottom {
-    right: -0.5px;
-    bottom: -0.5px;
+  .closing__corners::before,
+  .closing__corners::after {
+    width: 20px;
+    height: 20px;
   }
 
   .parent-note {
